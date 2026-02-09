@@ -1,0 +1,10 @@
+{
+  "uuid": "",
+  "port": 8200,
+  "friendly_name": "PyDLNA Server",
+  "media_paths": [],
+  "interface_ip": null,
+  "username": "admin",
+  "password": null,
+  "db_url": "sqlite+aiosqlite:///pydlna.db"
+}
