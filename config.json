@@ -1,0 +1,17 @@
+{
+  "uuid": "71ed82eb-744c-4b95-83fa-3a77749bf187",
+  "port": 8200,
+  "host": "0.0.0.0",
+  "app_name": "PyDLNA Server",
+  "friendly_name": "Kunals",
+  "media_paths": [
+    "media",
+    "I:\\"
+  ],
+  "database_url": "sqlite+aiosqlite:///./pydlna_0ed27cb2-014a-46ef-9817-e7f8b17a21c7.db",
+  "interface_ip": null,
+  "pid": null,
+  "username": "K",
+  "password": null,
+  "pwa_mode": false
+}
