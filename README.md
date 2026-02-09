@@ -31,13 +31,13 @@
 
 ## 📥 Download
 
-### Windows (v1.1.1)
+### Windows (v1.1.2)
 
 | Version | Description | Download |
 |---------|-------------|----------|
-| **Installer** | Recommended. Includes desktop icon & uninstaller. | [PyDLNA-v1.1.1-Setup.exe](https://github.com/kunalsinghks/pydlna/releases/download/v1.1.1/PyDLNA-v1.1.1-Setup.exe) |
-| **Portable** | No installation required. Just extract and run. | [PyDLNA-Portable.zip](https://github.com/kunalsinghks/pydlna/releases/download/v1.1.1/PyDLNA-Portable.zip) |
-| **Source** | For developers. | [Source.zip](https://github.com/kunalsinghks/pydlna/archive/refs/tags/v1.1.1.zip) |
+| **Installer** | Recommended. Includes desktop icon & uninstaller. | [PyDLNA-v1.1.2-Setup.exe](https://github.com/kunalsinghks/pydlna/releases/download/v1.1.2/PyDLNA-v1.1.2-Setup.exe) |
+| **Portable** | No installation required. Just extract and run. | [PyDLNA-Portable.zip](https://github.com/kunalsinghks/pydlna/releases/download/v1.1.2/PyDLNA-Portable.zip) |
+| **Source** | For developers. | [Source.zip](https://github.com/kunalsinghks/pydlna/archive/refs/tags/v1.1.2.zip) |
 
 ### System Requirements
 - Windows 10/11 (64-bit)

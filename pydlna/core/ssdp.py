@@ -5,7 +5,7 @@ import struct
 import re
 from email.utils import formatdate
 
-from ..config import settings
+from pydlna.config import settings
 
 logger = logging.getLogger(__name__)
 

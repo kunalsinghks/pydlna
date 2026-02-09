@@ -2,8 +2,8 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
 from contextlib import asynccontextmanager
-from .config import settings
-from .models import MediaItem  # Critical: registers models with SQLModel.metadata
+from pydlna.config import settings
+from pydlna.models import MediaItem  # Critical: registers models with SQLModel.metadata
 
 engine = create_async_engine(settings.database_url, echo=False, future=True)
 async_session = sessionmaker(

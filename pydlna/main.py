@@ -12,12 +12,26 @@ from tkinter import filedialog, messagebox
 import customtkinter as ctk
 import pystray
 from PIL import Image, ImageDraw
-from .config import load_settings, settings, update_media_paths, save_config
-from .scanner import MediaScanner
+from pydlna.config import load_settings, settings, update_media_paths, save_config
+from pydlna.scanner import MediaScanner
 
 # Setup basic logging
-logging.basicConfig(level=logging.INFO)
+try:
+    log_dir = os.path.expanduser("~")
+    log_file = os.path.join(log_dir, "pydlna_debug.log")
+except Exception:
+    log_file = "pydlna.log"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file, mode='w'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 logger = logging.getLogger("pydlna")
+logger.info("Application starting...")
 
 # Global reference to control server
 server_instance = None
@@ -289,7 +303,7 @@ class PyDLNAGUI(ctk.CTk):
             return
             
         async def do_reset():
-            from .db import engine
+            from pydlna.db import engine
             from sqlmodel import SQLModel
             try:
                 async with engine.begin() as conn:
@@ -319,14 +333,32 @@ class PyDLNAGUI(ctk.CTk):
 def run_server():
     global server_instance
     try:
-        from .web.server import app
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        config = uvicorn.Config(app, host=settings.host, port=settings.port, log_level="info")
+        logger.info("Importing web app...")
+        try:
+            from pydlna.web.server import app
+        except ImportError:
+            from web.server import app
+            
+        logger.info(f"Starting Uvicorn on {settings.host}:{settings.port}...")
+        
+        # We need a reference to the server to stop it
+        # uvicorn.run doesn't return the server easily.
+        # So we keep using Server but simplify the loop.
+        
+        config = uvicorn.Config(app, host=settings.host, port=settings.port, log_level="info", workers=1, log_config=None)
         server_instance = uvicorn.Server(config)
-        loop.run_until_complete(server_instance.serve())
+        
+        # This is the most robust way to run uvicorn in a thread
+        server_instance.run() 
+        
     except Exception as e:
-        logger.error(f"Uvicorn server failed: {e}")
+        logger.error(f"FATAL: Uvicorn server failed: {e}", exc_info=True)
+        try:
+            import tkinter.messagebox as mb
+            mb.showerror("Server Error", f"Server failed to start:\n{e}")
+        except:
+            pass
+        server_instance = None
 
 def main():
     parser = argparse.ArgumentParser()

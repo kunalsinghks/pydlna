@@ -1,4 +1,4 @@
-from ..xml_utils import wrap_soap_response
+from pydlna.xml_utils import wrap_soap_response
 
 SERVICE_TYPE = "urn:schemas-upnp-org:service:ConnectionManager:1"
 

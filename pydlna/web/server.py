@@ -16,12 +16,12 @@ from pathlib import Path
 from pydantic import BaseModel
 from xml.etree import ElementTree
 
-from ..config import settings, update_media_paths, update_settings
-from ..db import get_session, init_db
-from ..models import MediaItem
-from ..services.cds import ContentDirectoryService
-from ..services.cms import ConnectionManagerService
-from ..scanner import MediaScanner
+from pydlna.config import settings, update_media_paths, update_settings
+from pydlna.db import get_session, init_db
+from pydlna.models import MediaItem
+from pydlna.services.cds import ContentDirectoryService
+from pydlna.services.cms import ConnectionManagerService
+from pydlna.scanner import MediaScanner
 from sqlmodel import select
 
 logger = logging.getLogger(__name__)
@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
     logger.info("Server lifespan starting...")
     await init_db()
     
-    from ..core.ssdp import start_ssdp
+    from pydlna.core.ssdp import start_ssdp
     transport, protocol = await start_ssdp()
     
     scanner = MediaScanner(settings.media_paths)

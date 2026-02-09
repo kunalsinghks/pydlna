@@ -5,10 +5,10 @@ from pathlib import Path
 from sqlalchemy import select, func
 from xml.etree.ElementTree import Element, tostring
 
-from ..config import settings
-from ..db import get_session
-from ..models import MediaItem, MediaType
-from ..xml_utils import create_didl_item, create_didl_container, wrap_soap_response
+from pydlna.config import settings
+from pydlna.db import get_session
+from pydlna.models import MediaItem, MediaType
+from pydlna.xml_utils import create_didl_item, create_didl_container, wrap_soap_response
 
 logger = logging.getLogger(__name__)
 

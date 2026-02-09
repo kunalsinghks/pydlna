@@ -22,8 +22,8 @@ root = Path(__file__).parent
 PyInstaller.__main__.run([
     'run.py',
     '--name=PyDLNA',
-    '--onefile',
-    '--noconsole',  # Updated: Hide console window
+    '--onedir',   # Use directory mode for better stability
+    '--noconsole',  # Hide console window
     '--icon=favicon.ico' if Path('favicon.ico').exists() else '',
     
     # Include data files - VERY IMPORTANT

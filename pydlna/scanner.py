@@ -10,9 +10,9 @@ import subprocess
 import json
 import time
 
-from .models import MediaItem, MediaType
-from .db import get_session
-from .config import settings
+from pydlna.models import MediaItem, MediaType
+from pydlna.db import get_session
+from pydlna.config import settings
 
 # ... imports
 
@@ -178,8 +178,10 @@ class MediaScanner:
         
         if media_type == MediaType.VIDEO:
             try:
+                # On Windows, hide the console window for subprocesses
+                creationflags = 0x08000000 if os.name == 'nt' else 0
                 cmd = ['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', '-show_streams', str(path)]
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=5, encoding='utf-8', errors='ignore')
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=5, encoding='utf-8', errors='ignore', creationflags=creationflags)
                 if res.returncode == 0:
                     data = json.loads(res.stdout)
                     if 'format' in data and 'duration' in data['format']:
