@@ -319,9 +319,10 @@ class PyDLNAGUI(ctk.CTk):
 def run_server():
     global server_instance
     try:
+        from .web.server import app
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        config = uvicorn.Config("pydlna.web.server:app", host=settings.host, port=settings.port, log_level="info")
+        config = uvicorn.Config(app, host=settings.host, port=settings.port, log_level="info")
         server_instance = uvicorn.Server(config)
         loop.run_until_complete(server_instance.serve())
     except Exception as e:

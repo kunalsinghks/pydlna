@@ -11,6 +11,7 @@ else:
     base_path = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.append(base_path)
+os.chdir(base_path) # Ensure CWD is the executable directory
 
 from pydlna.main import main
 
